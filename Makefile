@@ -26,14 +26,14 @@ teardown:
 		echo "OK: Successfuly shutdown and removed all the required components..."
 
 gemspec:
-	@docker-compose exec plugin gem build $(GEM_NAME).gemspec && \
+	@docker-compose exec -T plugin gem build $(GEM_NAME).gemspec && \
 	echo "OK: Successfuly built .gem file that includes the plugin..."
 
 # NOTE: This is a temporary task until gem has released 3.1.0 version
 credspec:
-	@docker-compose exec plugin bash -c "echo :rubygems_api_key: $$(kontena vault read --value SPIO_GEM_HOST_API_KEY) > ~/.gem/credentials && chmod 0600 ~/.gem/credentials" && \
+	@docker-compose exec -T plugin bash -c "echo :rubygems_api_key: $$(kontena vault read --value SPIO_GEM_HOST_API_KEY) > ~/.gem/credentials && chmod 0600 ~/.gem/credentials" && \
 		echo "OK: Successfuly saved credspec file for publishing..."
 
 publish:
-	@docker-compose exec plugin gem push $(GEM_NAME)-0.3.5.gem && \
+	@docker-compose exec -T plugin gem push $(GEM_NAME)-0.3.5.gem && \
 		echo "OK: Successfuly published plugin to RubyGems.org..."
