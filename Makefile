@@ -35,5 +35,5 @@ credspec:
 		echo "OK: Successfuly saved credspec file for publishing..."
 
 publish:
-	@docker-compose exec -T plugin gem push $(GEM_NAME)-0.3.5.gem && \
+	@docker-compose exec -T plugin bash -c "gem push $$(basename $(GEM_NAME)*.gem)" && \
 		echo "OK: Successfuly published plugin to RubyGems.org..."
