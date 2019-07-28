@@ -21,6 +21,9 @@ pipeline {
     stage('make gemspec') {
       steps { sh 'make gemspec' }
     }
+    stage('make credspec') {
+      steps { sh 'make credspec' }
+    }
     stage('make publish') {
       when {
         branch 'master'
