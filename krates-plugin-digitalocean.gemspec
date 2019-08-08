@@ -4,14 +4,14 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'kontena/plugin/digital_ocean'
 
 Gem::Specification.new do |spec|
-  spec.name          = "staticpages-plugin-digitalocean"
+  spec.name          = "krates-plugin-digitalocean"
   spec.version       = Kontena::Plugin::DigitalOcean::VERSION
   spec.authors       = ["Pavel Tsurbeleu"]
   spec.email         = ["staticpagesio@gmail.com"]
 
-  spec.summary       = "StaticPages DigitalOcean plugin"
-  spec.description   = "StaticPages DigitalOcean plugin"
-  spec.homepage      = "https://staticpages.io"
+  spec.summary       = "Krates DigitalOcean plugin"
+  spec.description   = "Krates DigitalOcean plugin"
+  spec.homepage      = "https://krates.appsters.io"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }

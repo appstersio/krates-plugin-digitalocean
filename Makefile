@@ -1,5 +1,5 @@
 # README: http://makefiletutorial.com
-GEM_NAME = staticpages-plugin-digitalocean
+GEM_NAME = krates-plugin-digitalocean
 GEM_EMAIL = staticpagesio@gmail.com
 # Adding PHONY to a target will prevent make from confusing the phony target with a file name.
 # In this case, if `test` folder exists, `make test` will still be run.
@@ -31,7 +31,7 @@ gemspec:
 
 # NOTE: This is a temporary task until gem has released 3.1.0 version
 credspec:
-	@docker-compose exec -T plugin bash -c "echo :rubygems_api_key: $$(kontena vault read --value SPIO_GEM_HOST_API_KEY) > ~/.gem/credentials && chmod 0600 ~/.gem/credentials" && \
+	@docker-compose exec -T plugin bash -c "echo :rubygems_api_key: $$(kontena vault read --value KRATES_GEM_HOST_API_KEY) > ~/.gem/credentials && chmod 0600 ~/.gem/credentials" && \
 		echo "OK: Successfuly saved credspec file for publishing..."
 
 publish:
