@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   # NOTE: Exclude files not relevant to the plugin
   spec.files        -= %w[ Dockerfile Makefile docker-compose.yml docker-compose.dev.yml Jenkinsfile .dockerignore ]
 
-  spec.add_runtime_dependency 'kontena-cli', '1.5.2'
+  spec.add_runtime_dependency 'krates', '~> 1.6.0'
   spec.add_runtime_dependency 'droplet_kit', '~> 2.2'
   spec.add_runtime_dependency 'activesupport', '~> 4.0'
   spec.add_runtime_dependency 'pastel', '0.7.2'
