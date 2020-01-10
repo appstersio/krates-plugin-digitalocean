@@ -1,4 +1,4 @@
-# StaticPages DigitalOcean Plugin
+# Krates DigitalOcean Plugin
 
 This plugin provides support for DigitalOcean provisioning to Kontena CLI.
 
@@ -13,6 +13,6 @@ This plugin provides support for DigitalOcean provisioning to Kontena CLI.
 
 ## License
 
-StaticPages.io plugin is licensed under the MIT License. See [LICENSE](LICENSE.txt) for full license text.
+Krates is licensed under the MIT License. See [LICENSE](LICENSE.txt) for full license text.
 
 Kontena is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE.txt) for full license text.
