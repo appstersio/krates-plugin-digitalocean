@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   # NOTE: Exclude files not relevant to the plugin
   spec.files        -= %w[ Makefile .dockerignore .travis.yml .gitignore .gitmodules README.md .rspec ]
 
-  spec.add_runtime_dependency 'krates', '~> 1.6.0'
+  spec.add_runtime_dependency 'krates', '~> 1.6'
   spec.add_runtime_dependency 'droplet_kit', '~> 2.2'
   spec.add_runtime_dependency 'activesupport', '~> 4.0'
   spec.add_runtime_dependency 'pastel', '0.7.2'
