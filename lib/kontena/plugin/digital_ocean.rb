@@ -1,3 +1,4 @@
+# Here is a sample comment
 module Kontena
   module Plugin
     module DigitalOcean
