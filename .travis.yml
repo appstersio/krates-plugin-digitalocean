@@ -1,17 +1,14 @@
-language: ruby
-rvm:
-  - 2.1.10
-  - 2.2.6
-  - 2.3.3
-  - 2.4.1
+language: minimal
+sudo: required
+services:
+  - docker
 env:
-  - secure: "HAJRG+iaNDuyOMlbYSsXNjA2jwTMQonYJ3fHhm4zDPmIMupNnM+Krx650rVqlMP2KpNIYg4BEWCaDobTU9HoOy0AApmPGc8gGHMCP6v3cSnoGHxmiFy8yB7szgltcBz27PLeJN+exxRCjWPk677jW7JaooyYVSD64dEgVUrFju7olWUrvR0a0hAfBfawXU6kiGgdLnIEtc4AK+mokN9J6fR2PJthuDirZNgDPtVPuBJNFErI9Rh200stcZDOE3F1QE80HyAbrsyfvN/9cosSYDhJS9G+awAw6S+BqeBFZTQlDkWqJgdGsaacasxAmB5bgpkFY5tuv8DdqksK4nXlvsGVurQOYyufuc0y7HllPFVBPkzETCyWaafzek9acfTriLKJIJ26sFYQpuGQlgmAT/KyKYqqzX1ZAk/qe+haT5dt19bXzCHQHWapnWIll11AU0F67TiastmfyaBhnO8d983rwyxIww+8n3AfGPJXZ2eEjw2Rr17yqPYIVtkRoy7ctvCVJTeC6nDGhCqgU5lfl59656fzmJaBI9nWkadK0hQY8WB/5sLJ72pnRZDBbv3xIddS+JnDqxQWheMaJ7Oz5MkbHzdmRo3EhuHGPYpsdPQoeMudqGXX6OTxkQcRbKqJOHDE58rQzz7cZPvY2fwYOkhCspjLWcUAytbaMDkrEVs="
-cache: bundler
-script: bundle install && bundle exec rspec spec/
+  global:
+    secure: QyCK51F2OVY7Xcn3zMH9Pbfm6NDYayJF5A2Onf7iG8xTMjTVJys/qjaubH0c3ZrIEG7HQfKvxP5HPEzuKUgB6yaQn0Z6NuSlXqQLbkN7KT6AcieyPB9JR/p5lU+tB4SZLAdWztsriL+rOQ83ms0u805e3K/ty2EmM+yL5flLIsfmzp2lcXUKkwLyOXo7AMgfP+iwR2tIykxmZP3SGZD9dumF9rH7vZDr65EtGqBfU0FuLyvNxY1UgShEPynXaaAs/E0nbTajLiFQw/vZ+xAlk4AcEWagjW3xQE3cspahfRt/S8w/6zcXpoiyLUu7lkMrT60HxZ/2xe+uZ98niA1toyFaA2wdWwAO3iEURgsoER04sSg6NoL/wxUzYSVvqPjcfdhul5jcCsgJaFQyU55BvovMUVDFt09q6wyENanBwzlHU5QiR8XDq4whoqpO7FFI8dm43QxqjDEKj7KpIXHfd9DQ7mWQnXnyRxXcG2bSnIQ/WOSWDHK4n9lzmAmgN6mGHodZI4bwz5IlLZLfmUgYTBjdk+SzJYHM9WVT6FTb5PuURmMliuzx/vKrXKzYQd5/rB+8zgnim9l4WIxrI21f1uA5Q8JqjV1jsCQUDHSVRCV+5md7MS5l/foDXYkbr1uRNWvC4wES6QeyDC+kJnn+xLUGIlqo9D93L5LyNkEf9R4=
+script: make
 deploy:
-  provider: rubygems
-  api_key: $GEM_TOKEN
-  gem: kontena-plugin-digitalocean
+  provider: script
+  script: make publish
   on:
+    branch: master
     tags: true
-    rvm: 2.4.1
