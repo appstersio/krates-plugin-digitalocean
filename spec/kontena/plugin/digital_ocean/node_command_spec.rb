@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'kontena/plugin/digital_ocean/node_command'
 
 describe Kontena::Plugin::DigitalOcean::NodeCommand do

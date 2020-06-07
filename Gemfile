@@ -5,4 +5,9 @@ gemspec
 
 group :development do
   gem 'rspec'
+  gem 'pry'
+  gem 'pry-rescue'
+  gem 'pry-byebug'
+  gem 'pry-doc'
+  gem 'pry-stack_explorer'
 end

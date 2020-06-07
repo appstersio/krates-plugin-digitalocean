@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'kontena/plugin/digital_ocean/nodes/create_command'
 
 describe Kontena::Plugin::DigitalOcean::Nodes::CreateCommand do

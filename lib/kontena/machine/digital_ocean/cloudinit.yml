@@ -32,14 +32,14 @@ coreos:
       enable: true
       content: |
         [Unit]
-        Description=Kontena etcd 2.0
+        Description=Krates etcd 2.0
         After=docker.service
         After=krates-worker.service
         Requires=docker.service
         [Service]
         Restart=always
         RestartSec=5
-        ExecStart=/usr/bin/docker logs --tail=10 -f kontena-etcd
+        ExecStart=/usr/bin/docker logs --tail=10 -f krates-etcd
     - name: 50-docker.network
       mask: true
     - name: 50-docker-veth.network

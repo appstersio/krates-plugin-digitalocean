@@ -63,9 +63,7 @@ module Kontena
             sleep 0.5 until master_running?
           end
 
-          puts
-          puts "Kontena Master is now running at #{master_url}".colorize(:green)
-          puts
+          show_summary(master_url)
 
           data = {
             name: name.sub('kontena-master-', ''),
@@ -91,7 +89,14 @@ module Kontena
         end
 
         def erb(template, vars)
-          ERB.new(template, nil, '%<>-').result(OpenStruct.new(vars).instance_eval { binding })
+          # Trim mode has changed, here is how: https://redmine.ruby-lang.org/attachments/7457?utf8=✓&type=sbs
+          ERB.new(template, nil, '-').result(OpenStruct.new(vars).instance_eval { binding })
+        end
+
+        def show_summary(master_url)
+          puts
+          puts "Krates Master is now running at #{master_url}".colorize(:green)
+          puts
         end
       end
     end
