@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'kontena/plugin/digital_ocean/master/create_command'
 
 describe Kontena::Plugin::DigitalOcean::Master::CreateCommand do
@@ -9,6 +8,11 @@ describe Kontena::Plugin::DigitalOcean::Master::CreateCommand do
 
   let(:provisioner) do
     spy(:provisioner)
+  end
+
+  before do
+    # Supress display_logo output triggered by 'master create' hook in krates/cli/lib/kontena/callbacks/master/deploy/01_show_logo_before_deploy.rb
+    allow_any_instance_of(Kontena::Cli::Common).to receive(:display_logo).and_return(spy)
   end
 
   describe '#run' do

@@ -14,7 +14,7 @@ write_files:
     owner: root
     content: | <% ssl_cert.split(/\n/).each do |row| %>
       <%= row %><% end %><% end %>
-  - path: /opt/bin/kontena-haproxy.sh
+  - path: /opt/bin/krates-haproxy.sh
     permissions: 0755
     owner: root
     content: |
@@ -24,10 +24,10 @@ write_files:
       else
         SSL_CERT="**None**"
       fi
-      /usr/bin/docker run --name=kontena-server-haproxy \
+      /usr/bin/docker run --name=krates-server-haproxy \
         --link kontena-server-api:kontena-server-api \
         -e SSL_CERT="$SSL_CERT" \
-        -p 80:80 -p 443:443 kontena/haproxy:latest
+        -p 80:80 -p 443:443 krates/haproxy:latest
 coreos:
   units:
 <% unless mongodb_uri -%>
@@ -56,19 +56,19 @@ coreos:
             mongo:3.0 mongod --smallfiles
         ExecStop=/usr/bin/docker stop kontena-server-mongo
 <% end -%>
-    - name: kontena-server-api.service
+    - name: krates-server-api.service
       command: start
       enable: true
       content: |
         [Unit]
-        Description=kontena-server-api
+        Description=krates-server-api
         After=network-online.target
         After=docker.service
         After=kontena-server-mongo.service
-        Description=Kontena Master
-        Documentation=http://www.kontena.io/
-        Before=kontena-server-haproxy.service
-        Wants=kontena-server-haproxy.service
+        Description=Krates Master
+        Documentation=https://github.com/appstersio/krates/
+        Before=krates-server-haproxy.service
+        Wants=krates-server-haproxy.service
         Requires=network-online.target
         Requires=docker.service
 <% unless mongodb_uri -%>
@@ -82,7 +82,7 @@ coreos:
         EnvironmentFile=-/etc/kontena-server.custom.env
         ExecStartPre=-/usr/bin/docker stop kontena-server-api
         ExecStartPre=-/usr/bin/docker rm kontena-server-api
-        ExecStartPre=-/usr/bin/docker pull kontena/server:${KONTENA_VERSION}
+        ExecStartPre=-/usr/bin/docker pull krates/master:${KONTENA_VERSION}
         ExecStart=/usr/bin/docker run --name kontena-server-api \
 <% if mongodb_uri -%>
             -e MONGODB_URI=<%= mongodb_uri %> \
@@ -97,30 +97,30 @@ coreos:
             -e INITIAL_ADMIN_CODE=<%= initial_admin_code %> \
 <% end -%>
             -e VAULT_KEY=${KONTENA_VAULT_KEY} -e VAULT_IV=${KONTENA_VAULT_IV} \
-            kontena/server:${KONTENA_VERSION}
+            krates/master:${KONTENA_VERSION}
         ExecStop=/usr/bin/docker stop kontena-server-api
 
-    - name: kontena-server-haproxy.service
+    - name: krates-server-haproxy.service
       command: start
       enable: true
       content: |
         [Unit]
-        Description=kontena-server-haproxy
+        Description=krates-server-haproxy
         After=network-online.target
         After=docker.service
-        Description=Kontena Server HAProxy
-        Documentation=http://www.kontena.io/
+        Description=Krates Server HAProxy
+        Documentation=https://github.com/appstersio/krates-haproxy
         Requires=network-online.target
         Requires=docker.service
-        Requires=kontena-server-api.service
+        Requires=krates-server-api.service
 
         [Service]
         Restart=always
         RestartSec=5
         EnvironmentFile=/etc/kontena-server.env
         EnvironmentFile=-/etc/kontena-server.custom.env
-        ExecStartPre=-/usr/bin/docker stop kontena-server-haproxy
-        ExecStartPre=-/usr/bin/docker rm kontena-server-haproxy
-        ExecStartPre=-/usr/bin/docker pull kontena/haproxy:latest
-        ExecStart=/opt/bin/kontena-haproxy.sh
-        ExecStop=/usr/bin/docker stop kontena-server-haproxy
+        ExecStartPre=-/usr/bin/docker stop krates-server-haproxy
+        ExecStartPre=-/usr/bin/docker rm krates-server-haproxy
+        ExecStartPre=-/usr/bin/docker pull krates/haproxy:latest
+        ExecStart=/opt/bin/krates-haproxy.sh
+        ExecStop=/usr/bin/docker stop krates-server-haproxy

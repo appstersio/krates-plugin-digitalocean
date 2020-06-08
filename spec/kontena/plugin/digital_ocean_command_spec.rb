@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'kontena/plugin/digital_ocean_command'
 
 describe Kontena::Plugin::DigitalOceanCommand do

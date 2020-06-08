@@ -1,4 +1,3 @@
-require 'spec_helper'
 require 'kontena/plugin/digital_ocean/master/terminate_command'
 
 describe Kontena::Plugin::DigitalOcean::Master::TerminateCommand do
