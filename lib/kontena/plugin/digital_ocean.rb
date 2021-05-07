@@ -2,7 +2,7 @@
 module Kontena
   module Plugin
     module DigitalOcean
-      VERSION = "0.3.11"
+      VERSION = "0.3.12"
     end
   end
 end

@@ -43,17 +43,17 @@ describe Kontena::Machine::DigitalOcean::MasterProvisioner do
         data = subject.run!(:name => 'xoxo')
       end
 
-      it "uses latest 'krates/master' image" do
+      it "uses latest 'quay.io/krates/master' image" do
         expect(droplet.user_data).to include('- name: krates-server-api.service')
-        expect(droplet.user_data).to include('krates/master:${KONTENA_VERSION}')
+        expect(droplet.user_data).to include('quay.io/krates/master')
         expect(droplet.user_data).to include('ExecStart=/usr/bin/docker run --name kontena-server-api \\')
       end
 
-      it "stops existing 'krates/master' container at stop" do
+      it "stops existing 'quay.io/krates/master' container at stop" do
         expect(droplet.user_data).to include('ExecStop=/usr/bin/docker stop kontena-server-api')
       end
 
-      it "stops and removes existing 'krates/master' container at pre-start" do
+      it "stops and removes existing 'quay.io/krates/master' container at pre-start" do
         expect(droplet.user_data).to include('ExecStartPre=-/usr/bin/docker stop kontena-server-api')
         expect(droplet.user_data).to include('ExecStartPre=-/usr/bin/docker rm kontena-server-api')
       end
