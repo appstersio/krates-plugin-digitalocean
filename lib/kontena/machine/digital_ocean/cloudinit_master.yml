@@ -4,7 +4,6 @@ write_files:
     permissions: 0600
     owner: root
     content: |
-      KONTENA_VERSION=<%= version %>
       KONTENA_VAULT_KEY=<%= vault_secret %>
       KONTENA_VAULT_IV=<%= vault_iv %>
       <% if ssl_cert %>SSL_CERT="/etc/kontena-server.pem"
@@ -82,7 +81,7 @@ coreos:
         EnvironmentFile=-/etc/kontena-server.custom.env
         ExecStartPre=-/usr/bin/docker stop kontena-server-api
         ExecStartPre=-/usr/bin/docker rm kontena-server-api
-        ExecStartPre=-/usr/bin/docker pull krates/master:${KONTENA_VERSION}
+        ExecStartPre=-/usr/bin/docker pull quay.io/krates/master
         ExecStart=/usr/bin/docker run --name kontena-server-api \
 <% if mongodb_uri -%>
             -e MONGODB_URI=<%= mongodb_uri %> \
@@ -97,7 +96,7 @@ coreos:
             -e INITIAL_ADMIN_CODE=<%= initial_admin_code %> \
 <% end -%>
             -e VAULT_KEY=${KONTENA_VAULT_KEY} -e VAULT_IV=${KONTENA_VAULT_IV} \
-            krates/master:${KONTENA_VERSION}
+            quay.io/krates/master
         ExecStop=/usr/bin/docker stop kontena-server-api
 
     - name: krates-server-haproxy.service
